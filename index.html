@@ -125,30 +125,28 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .ranura-wrap{position:relative;padding-top:18px}
 .ranura{position:absolute;top:0;left:-3%;right:-3%;height:26px;background:#000;border-radius:14px;z-index:3;box-shadow:0 6px 0 rgba(0,0,0,.12)}
 .ranura::after{content:"";position:absolute;left:5%;right:5%;top:10px;height:5px;background:#3a3a3a;border-radius:4px}
-.ticket-caja{overflow:hidden;padding:0 4px 10px;max-height:calc(100vh - 210px);min-height:0}
-.ticket{position:relative;background:#FBFAF7;color:#111;padding:20px 22px 34px;font-family:var(--mono);text-transform:uppercase;transform:translateY(-102%);transition:transform 2.6s cubic-bezier(.3,.6,.25,1);
-  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 100% repeat-x;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 100% repeat-x;
-  filter:drop-shadow(0 10px 22px rgba(0,0,0,.18))}
+.ticket-caja{overflow:visible;padding:0 4px 10px;min-height:0;container-type:inline-size}
+.ticket{position:relative;background:#fff;color:#111;padding:8cqw 6cqw 10cqw;font-family:var(--mono);text-transform:uppercase;transform:translateY(-102%);transition:transform 2.6s cubic-bezier(.3,.6,.25,1)}
 .ticket.sale{transform:none}
-.ticket .th{text-align:center}
-.ticket .th b{font-family:var(--sans);text-transform:none;font-weight:700;font-size:34px;letter-spacing:-.035em;line-height:1;display:block}
-.ticket .th small{font-size:10px;letter-spacing:.05em;display:block;margin-top:4px}
-.ticket .meta{font-size:10.5px;display:flex;justify-content:space-between;gap:8px;margin-top:12px}
-.ticket hr{border:0;border-top:2px dashed #111;margin:11px 0}
-.ticket .cubo{display:flex;justify-content:space-between;align-items:center;font-size:11px}
-.ticket .cubo b{background:#111;color:#fff;padding:6px 12px;font-size:15px;letter-spacing:.06em;font-weight:700}
-.ticket .fila{display:flex;align-items:center;gap:10px;padding:5px 0;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s}
+.ticket .th{text-align:left}
+.ticket .th b{font-family:var(--sans);text-transform:none;font-weight:700;font-size:19.2cqw;letter-spacing:-.055em;line-height:.95;display:block;white-space:nowrap}
+.ticket .th small{display:none}
+.ticket .meta{font-size:3.4cqw;display:flex;justify-content:space-between;gap:8px;margin-top:16cqw}
+.ticket hr{border:0;border-top:1px solid #111;margin:4cqw 0}
+.ticket .cubo{display:flex;justify-content:space-between;align-items:center;font-size:3.4cqw;min-height:11cqw}
+.ticket .cubo b{background:#111;color:#fff;padding:2.5cqw 3.5cqw;font-size:3.4cqw;letter-spacing:0;font-weight:500}
+.ticket .filas{padding:3cqw 0}
+.ticket .fila{display:flex;align-items:center;gap:10px;padding:2cqw 0;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s}
 .ticket .fila.v{opacity:1;transform:none}
-.ticket .fila img{width:34px;height:28px;object-fit:contain;filter:grayscale(1) contrast(1.6)}
-.ticket .fila .n{flex:1;font-size:13px;font-weight:500}
-.ticket .fila .c{font-size:30px;font-weight:700;line-height:1;min-width:2ch;text-align:right}
+.ticket .fila .n{flex:1;font-size:3.4cqw;font-weight:400}
+.ticket .fila .c{font-size:5.7cqw;font-weight:700;line-height:1;min-width:2ch;text-align:right}
 .ticket .total{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
-.ticket .total span:first-child{font-size:13px}
-.ticket .total span:last-child{font-size:40px;line-height:1}
-.ticket .pie-t{display:flex;gap:12px;align-items:stretch;margin-top:2px}
-.ticket .sello{flex:1;border:2px dashed #111;min-height:74px;display:grid;place-items:center;font-size:10px;text-align:center;padding:6px;line-height:1.4}
-.ticket .qr{width:88px;border:2px dashed #111;display:grid;place-items:center;font-size:10px;text-align:center;line-height:1.3;padding:4px;font-size:9px}
-.ticket .gracias{text-align:center;font-size:10px;margin-top:12px;letter-spacing:.05em}
+.ticket .total span:first-child{font-size:5.5cqw;font-weight:400}
+.ticket .total span:last-child{font-size:13cqw;line-height:1}
+.ticket .pie-t{display:flex;gap:5cqw;align-items:stretch;margin-top:8cqw}
+.ticket .sello{flex:1;border:1px dashed #111;min-height:23cqw;display:grid;place-items:center;font-size:3.4cqw;text-align:center;padding:6px;line-height:1.4}
+.ticket .qr{width:23cqw;height:23cqw;flex:none;display:block}
+.ticket .gracias{text-align:center;font-size:3.4cqw;margin-top:16cqw;letter-spacing:.02em}
 .hecho-fila{display:flex;gap:12px;flex-wrap:wrap}
 
 /* ---------- diálogo ---------- */
@@ -556,6 +554,34 @@ function pCategoria(c){
 }
 
 /* ---------- final: interpretar → generar → imprimir ---------- */
+function qrDecorativo(){
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','-1 -1 23 23');
+  svg.setAttribute('class','qr');
+  svg.setAttribute('aria-hidden','true');
+  const fondo = document.createElementNS(ns,'rect');
+  fondo.setAttribute('x','-1'); fondo.setAttribute('y','-1');
+  fondo.setAttribute('width','23'); fondo.setAttribute('height','23');
+  fondo.setAttribute('fill','#fff'); svg.append(fondo);
+  const finders = [[0,0],[14,0],[0,14]];
+  const celdas = [];
+  for(let y=0;y<21;y++){
+    for(let x=0;x<21;x++){
+      const finder = finders.find(([fx,fy])=>x>=fx && x<fx+7 && y>=fy && y<fy+7);
+      const oscuro = finder
+        ? (()=>{ const dx=x-finder[0], dy=y-finder[1]; return dx===0 || dx===6 || dy===0 || dy===6 || (dx>=2 && dx<=4 && dy>=2 && dy<=4); })()
+        : (x*17+y*31+x*y*7)%13<6;
+      if(oscuro) celdas.push(`M${x} ${y}h1v1h-1z`);
+    }
+  }
+  const modulos = document.createElementNS(ns,'path');
+  modulos.setAttribute('d',celdas.join(''));
+  modulos.setAttribute('fill','#000');
+  svg.append(modulos);
+  return svg;
+}
+
 function pTicket(){
   const t = construyeTicket();
   const barra = h('div',{class:'barra',role:'progressbar','aria-valuemin':'0','aria-valuemax':'100','aria-valuenow':'0'},h('i'));
@@ -564,19 +590,19 @@ function pTicket(){
   const cuerpo = h('p',{class:'cuerpo'},'Estamos preparando tu ticket.');
   const izq = h('div',{class:'izq'},titular,cuerpo,barra,estado);
 
-  const filas = t.filas.map(f=>h('div',{class:'fila'},pic(f.pic),h('span',{class:'n'},f.nombre),h('span',{class:'c'},String(f.objetos))));
+  const filas = t.filas.map(f=>h('div',{class:'fila'},h('span',{class:'n'},f.nombre),h('span',{class:'c'},String(f.objetos))));
   const ticket = h('article',{class:'ticket','aria-label':'Tu ticket'},
-    h('div',{class:'th'},h('b',{},'Cargando...'),h('small',{},'Proyecto académico de diseño gráfico')),
+    h('div',{class:'th'},h('b',{},'Cargando...')),
     h('div',{class:'meta'},h('span',{},t.punto),h('span',{},'Código '+t.codigo)),
     h('hr'),
-    h('div',{class:'cubo'},h('span',{},'Tu cubo'),h('b',{},t.cubo)),
+    h('div',{class:'cubo'},h('span',{},'Cubo'),h('b',{},t.cubo)),
     h('hr'),
-    ...filas,
+    h('div',{class:'filas'},...filas),
     h('hr'),
     h('div',{class:'total'},h('span',{},'Total de objetos'),h('span',{},String(t.total))),
     h('hr'),
-    h('div',{class:'pie-t'},h('div',{class:'sello'},'Sello',h('br'),'de salida'),h('div',{class:'qr'},'QR',h('br'),'campaña',h('br'),'(provisional)')),
-    h('div',{class:'gracias'},t.cubo==='SIN CUBO'?'Recorre las salas y sella tu ticket':'Entrega este ticket en cada sala'));
+    h('div',{class:'pie-t'},h('div',{class:'sello'},'Sello de salida'),qrDecorativo()),
+    h('div',{class:'gracias'},'Entrega este ticket en cada sala'));
   const der = h('div',{class:'ranura-wrap'},h('div',{class:'ranura'}),h('div',{class:'ticket-caja'},ticket));
   const el = h('main',{class:'pantalla'},h('div',{class:'final'},izq,der));
   montar('ticket', cabecera(), el);
